@@ -1,25 +1,42 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Producto {
-    id: ID!
+    id: String!
     nombre: String!
     descripcion: String
     precio: Float!
-    imagenes: [String]
+    imagenes: [String!]!
     categoria: String
-    promocion: Boolean
+    promocion: Boolean!
   }
 
   type Query {
-    obtenerProductos: [Producto]
-    obtenerProducto(id: ID!): Producto
+    obtenerProductos: [Producto!]!
+    obtenerProducto(id: String!): Producto
   }
 
   type Mutation {
-    crearProducto(nombre: String!, descripcion: String, precio: Float!, imagenes: [String], categoria: String, promocion: Boolean): Producto
-    editarProducto(id: ID!, nombre: String, descripcion: String, precio: Float, imagenes: [String], categoria: String, promocion: Boolean): Producto
-    eliminarProducto(id: ID!): Producto
+    crearProducto(
+      nombre: String!
+      descripcion: String
+      precio: Float!
+      imagenes: [String!]!
+      categoria: String
+      promocion: Boolean
+    ): Producto
+
+    editarProducto(id: String!, datos: EditarProductoInput!): Producto
+    eliminarProducto(id: String!): Producto
+  }
+
+  input EditarProductoInput {
+    nombre: String
+    descripcion: String
+    precio: Float
+    imagenes: [String!]
+    categoria: String
+    promocion: Boolean
   }
 `;
 

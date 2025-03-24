@@ -1,7 +1,7 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const resolvers = {
+const productoResolvers = {
     Query: {
         obtenerProductos: async () => {
             return await prisma.producto.findMany();
@@ -26,4 +26,4 @@ const resolvers = {
     },
 };
 
-module.exports = resolvers;
+module.exports = productoResolvers;
